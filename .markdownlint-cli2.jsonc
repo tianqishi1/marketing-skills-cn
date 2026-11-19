@@ -1,0 +1,16 @@
+{
+  // 中文营销 skill 文档：关闭纯排版类规则，保留结构性/正确性规则
+  "config": {
+    "default": true,
+    "MD013": false,  // 行长（中文长句正常）
+    "MD026": false,  // 标题尾部标点（中文问号等）
+    "MD033": false,  // 内联 HTML
+    "MD034": false,  // 裸链接
+    "MD036": false,  // 强调当标题（模板中常用）
+    "MD040": false,  // 代码块语言标注
+    "MD041": false,  // 首行标题（SKILL.md 以 frontmatter 开头）
+    "MD024": { "siblings_only": true },
+    "MD060": false
+  },
+  "ignores": ["node_modules/**"]
+}

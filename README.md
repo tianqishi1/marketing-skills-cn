@@ -37,6 +37,7 @@ claude plugin install marketing-skills-cn@marketing-skills-cn
 ```
 
 安装后直接用自然语言触发，例如：
+
 - "帮我审计这个巨量账户，数据我粘贴给你"
 - "写 5 个小红书标题，产品是 XX，人群是 XX"
 - "千川全域推广 ROI 掉了，帮我诊断"
@@ -45,6 +46,7 @@ claude plugin install marketing-skills-cn@marketing-skills-cn
 ## 技能目录（5 组 28 个）
 
 ### A. 投放诊断与优化（11）
+
 | Skill | 用途 |
 |---|---|
 | ads-audit-cn | 信息流/搜索账户审计（巨量/腾讯/快手/百度/聚光，分平台 checklist） |
@@ -60,6 +62,7 @@ claude plugin install marketing-skills-cn@marketing-skills-cn
 | landing-page-audit-cn | 落地页审计（基木鱼/橙子/微信原生页/小程序/详情页） |
 
 ### B. 内容与种草（7）
+
 | Skill | 用途 |
 |---|---|
 | xhs-note-writer | 小红书笔记（标题/正文/标签/封面/评论区+违规规避） |
@@ -71,6 +74,7 @@ claude plugin install marketing-skills-cn@marketing-skills-cn
 | livestream-planner-cn | 直播策划（排品/脚本话术/流量节奏/复盘） |
 
 ### C. 私域与转化（3）
+
 | Skill | 用途 |
 |---|---|
 | private-domain-sop-cn | 企微私域 SOP（引流/标签/触达/复购/合规） |
@@ -78,6 +82,7 @@ claude plugin install marketing-skills-cn@marketing-skills-cn
 | campaign-planner-cn | 大促节点全案（618/双11/年货节节奏与机制） |
 
 ### D. 搜索与 AI 可见性（3）
+
 | Skill | 用途 |
 |---|---|
 | baidu-seo-cn | 百度 SEO（收录/落地页规范/算法红线/百度系占位） |
@@ -85,6 +90,7 @@ claude plugin install marketing-skills-cn@marketing-skills-cn
 | ai-visibility-cn | 国内 GEO（夸克/DeepSeek/豆包/元宝/Kimi/秘塔/百度AI） |
 
 ### E. 策略与合规（4）
+
 | Skill | 用途 |
 |---|---|
 | icp-research-cn | 人群洞察与画像（反漏斗分层+平台人群资产映射） |
@@ -107,3 +113,37 @@ claude plugin install marketing-skills-cn@marketing-skills-cn
 ## License
 
 MIT
+
+## 开发与质量门禁（CI/CD）
+
+[![CI](https://github.com/tianqishi1/marketing-skills-cn/actions/workflows/ci.yml/badge.svg)](https://github.com/tianqishi1/marketing-skills-cn/actions/workflows/ci.yml)
+
+`main` 为保护分支：**禁止直接 push**，所有变更走「新分支 → PR → CI 全绿 → 合并」。
+
+PR 必须通过 4 项质量门禁（`.github/workflows/ci.yml`）：
+
+| 检查 | 内容 |
+|---|---|
+| `validate` | 每个 skill 有 SKILL.md、frontmatter 合法且 name=目录名、description 非空≤1024 字符、正文非空壳；plugin.json/marketplace.json 合法且一致、version 为 semver；install.ps1 语法检查 |
+| `markdown-lint` | markdownlint（中文文档友好配置，见 `.markdownlint-cli2.jsonc`） |
+| `link-check` | lychee 离线检查全部 Markdown 内部链接与锚点 |
+| `secret-scan` | gitleaks 密钥/凭据泄漏扫描 |
+
+本地预检：
+
+```powershell
+python scripts/validate_repo.py          # 结构校验
+npx -y markdownlint-cli2 --fix "**/*.md" # lint + 自动修复
+```
+
+### 发布（CD）
+
+`.github/workflows/release.yml`：打 `v*.*.*` tag 自动触发——校验 tag 与 `plugin.json` version 一致 → 重跑质量校验 → `git archive` 打包插件 zip → 创建 GitHub Release 并附产物。
+
+```powershell
+# 1. 在 PR 中把 .claude-plugin/plugin.json 的 version 升到 1.1.0 并合并
+# 2. 打 tag 推送：
+git checkout main; git pull
+git tag v1.1.0; git push origin v1.1.0
+# 3. Actions 自动发布 Release
+```

@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: pip install pyyaml
+      - name: Validate repo
+        run: python scripts/validate_repo.py
+      - name: Tag must match plugin.json version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          VER=$(python -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          if [ "$TAG" != "$VER" ]; then
+            echo "::error::tag $GITHUB_REF_NAME != plugin.json version $VER"
+            exit 1
+          fi
+      - name: Lint markdown
+        run: npx -y markdownlint-cli2 "**/*.md"
+      - name: Package plugin zip
+        run: git archive --format=zip --prefix=marketing-skills-cn/ -o "marketing-skills-cn-${GITHUB_REF_NAME}.zip" HEAD
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            "marketing-skills-cn-${GITHUB_REF_NAME}.zip" \
+            --title "marketing-skills-cn $GITHUB_REF_NAME" \
+            --generate-notes
