@@ -1,0 +1,9 @@
+{
+  "name": "marketing-skills-cn",
+  "description": "28 个国内营销 skills：巨量/腾讯/快手/百度/聚光投放诊断、电商站内（千川/万相台/京准通/拼多多）、小红书/抖音/公众号内容、达人种草、直播、企微私域、百度SEO、社交搜索、国内AI可见性（GEO）、广告法合规。零 MCP 依赖，用平台导出数据即可运行。",
+  "version": "1.0.0",
+  "author": { "name": "marketing-skills-cn contributors" },
+  "license": "MIT",
+  "keywords": ["claude-skills", "codex-skills", "marketing", "china", "巨量引擎", "小红书", "私域", "geo", "合规"],
+  "skills": "./skills"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "marketing-skills-cn",
+  "owner": { "name": "marketing-skills-cn contributors" },
+  "plugins": [
+    {
+      "name": "marketing-skills-cn",
+      "source": "./",
+      "description": "28 个国内营销 skills：投放诊断、电商站内、内容种草、达人直播、企微私域、百度SEO、社交搜索、国内AI可见性、广告法合规。零 MCP 依赖。"
+    }
+  ]
+}

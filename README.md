@@ -1,0 +1,109 @@
+# marketing-skills-cn：28 个国内营销 Skills（Codex / Claude Code 通用）
+
+对标 [irinabuht12-oss/marketing-skills](https://github.com/irinabuht12-oss/marketing-skills)（49 个 Google/Meta 营销 skills）重写的**国内适配版**：不是汉化，而是按中国市场的渠道、平台机制、数据生态与合规约束整体重建。适用性评估见 [docs/evaluation.md](docs/evaluation.md)。
+
+**覆盖**：巨量引擎/千川、腾讯广告、快手磁力、百度营销、小红书聚光/蒲公英、万相台 AI 无界、京准通、拼多多、企微私域、直播电商、百度 SEO、社交搜索、国内 AI 搜索（夸克/DeepSeek/豆包/元宝/Kimi/秘塔）、广告法合规。
+
+## 设计原则
+
+1. **零 MCP 依赖**：国内没有统一的广告数据连接器。所有分析类 skill 的数据契约 = 平台后台导出 CSV/Excel 或粘贴数据（字段按各平台真实导出名对齐）。
+2. **流程型 skill**：每个都有数据契约 → 流程 → 阈值/checklist → 输出模板 → 约束，不写空泛描述。
+3. **合规内嵌**：内容生成类自带红线清单；系统检查用 `ad-compliance-cn`（广告法/互联网广告管理办法/行业宣称/平台规范）。
+4. **阈值是经验值**：所有数字门槛要求用自有账户历史校准；输出必带置信度与数据缺口说明，不臆造数据。
+5. **平台事实为 2025–2026 现行口径**：千川全域推广、万相台 AI 无界（关键词推广/人群推广/货品全站推）、微信小店、磁力金牛、灵犀 AIPS、如翼 5R 等；产品迭代快，以用户后台实际为准。
+
+## 安装
+
+### Codex（本应用）
+
+```powershell
+# 复制全部 skills 到 Codex 技能目录
+.\install.ps1 -Target codex
+```
+
+或手动：把 `skills/` 下各文件夹复制到 `~/.codex/skills/`（Windows：`C:\Users\<你>\.codex\skills\`）。
+
+### Claude Code
+
+```powershell
+.\install.ps1 -Target claude     # 复制到 ~/.claude/skills/
+```
+
+或作为插件市场安装（把本仓库推到 GitHub 后）：
+
+```
+claude plugin marketplace add <你的用户名>/marketing-skills-cn
+claude plugin install marketing-skills-cn@marketing-skills-cn
+```
+
+安装后直接用自然语言触发，例如：
+- "帮我审计这个巨量账户，数据我粘贴给你"
+- "写 5 个小红书标题，产品是 XX，人群是 XX"
+- "千川全域推广 ROI 掉了，帮我诊断"
+- "检查这段文案有没有违反广告法"
+
+## 技能目录（5 组 28 个）
+
+### A. 投放诊断与优化（11）
+| Skill | 用途 |
+|---|---|
+| ads-audit-cn | 信息流/搜索账户审计（巨量/腾讯/快手/百度/聚光，分平台 checklist） |
+| ecommerce-ads-cn | 电商站内投放（千川全域/万相台AI无界/京准通/拼多多） |
+| cpa-diagnostics-cn | 转化成本上涨/掉量诊断树 |
+| wasted-spend-finder-cn | 无效消耗排查与止损清单 |
+| budget-allocator-cn | 跨渠道预算分配与情景推演（边际成本视角） |
+| creative-fatigue-cn | 素材疲劳监测与轮换排期（国内短生命周期口径） |
+| ab-test-analyzer-cn | A/B 测试设计与显著性（含平台分发偏差纠正） |
+| ad-anomaly-monitor-cn | 每日数据异常巡检（P0–P2 分级） |
+| ads-weekly-report-cn | 投放周报/客户汇报（结论先行） |
+| search-term-mining-cn | 搜索词挖词与否词（百度/巨量搜索/小红书/电商） |
+| landing-page-audit-cn | 落地页审计（基木鱼/橙子/微信原生页/小程序/详情页） |
+
+### B. 内容与种草（7）
+| Skill | 用途 |
+|---|---|
+| xhs-note-writer | 小红书笔记（标题/正文/标签/封面/评论区+违规规避） |
+| douyin-script-writer | 抖音脚本（前3秒钩子/完播结构/千川变体） |
+| wechat-article-writer | 公众号文章（打开率/搜一搜埋词/广告标注） |
+| content-repurposer-cn | 一稿多发（公众号/小红书/抖音/视频号/知乎/微博/B站） |
+| kol-selection-cn | 达人筛选与假数据识别（蒲公英/星图/花火/聚星/芝士） |
+| seeding-strategy-cn | 种草策略（KFS/人群反漏斗/AIPS/O-5A/5R） |
+| livestream-planner-cn | 直播策划（排品/脚本话术/流量节奏/复盘） |
+
+### C. 私域与转化（3）
+| Skill | 用途 |
+|---|---|
+| private-domain-sop-cn | 企微私域 SOP（引流/标签/触达/复购/合规） |
+| wecom-touch-sequence-cn | 私域触达序列（替代 email sequence） |
+| campaign-planner-cn | 大促节点全案（618/双11/年货节节奏与机制） |
+
+### D. 搜索与 AI 可见性（3）
+| Skill | 用途 |
+|---|---|
+| baidu-seo-cn | 百度 SEO（收录/落地页规范/算法红线/百度系占位） |
+| social-search-seo-cn | 社交搜索卡位（小红书/抖音/微信搜一搜） |
+| ai-visibility-cn | 国内 GEO（夸克/DeepSeek/豆包/元宝/Kimi/秘塔/百度AI） |
+
+### E. 策略与合规（4）
+| Skill | 用途 |
+|---|---|
+| icp-research-cn | 人群洞察与画像（反漏斗分层+平台人群资产映射） |
+| competitor-teardown-cn | 竞品拆解（蝉妈妈/千瓜/新榜等公开数据） |
+| ad-compliance-cn | 广告合规检查（极限词/行业红线/软文标注/平台规范） |
+| tracking-setup-cn | 渠道追踪与归因（UTM局限/clickid回传/渠道活码/小程序参数） |
+
+## 与原仓库的关系
+
+- 继承其工程范式（数据契约→流程→阈值→输出模板→置信度），MIT 协议兼容。
+- 渠道知识整体重写；新增原仓库没有的国内必需能力（种草/达人/直播/私域/电商站内/合规/社交搜索）。
+- 不捆绑任何商业 MCP 导流。
+
+## 免责声明
+
+- 所有阈值为行业经验起点，非平台官方标准；请以自有账户数据校准。
+- 平台产品名与规则迭代快，以各平台当期后台与官方公告为准。
+- 合规检查为营销辅助，不构成法律意见；重大投放请法务复核。
+
+## License
+
+MIT
