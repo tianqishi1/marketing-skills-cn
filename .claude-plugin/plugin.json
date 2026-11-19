@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": { "name": "marketing-skills-cn contributors" },
   "license": "MIT",
+  "repository": "https://github.com/tianqishi1/marketing-skills-cn",
   "keywords": ["claude-skills", "codex-skills", "marketing", "china", "巨量引擎", "小红书", "私域", "geo", "合规"],
   "skills": "./skills"
 }

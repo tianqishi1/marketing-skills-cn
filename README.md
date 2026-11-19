@@ -29,10 +29,10 @@
 .\install.ps1 -Target claude     # 复制到 ~/.claude/skills/
 ```
 
-或作为插件市场安装（把本仓库推到 GitHub 后）：
+或作为插件市场安装：
 
 ```
-claude plugin marketplace add <你的用户名>/marketing-skills-cn
+claude plugin marketplace add tianqishi1/marketing-skills-cn
 claude plugin install marketing-skills-cn@marketing-skills-cn
 ```
 
