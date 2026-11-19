@@ -1,0 +1,5 @@
+# Release 打包（git archive）时排除开发用文件
+.github export-ignore
+scripts export-ignore
+.markdownlint-cli2.jsonc export-ignore
+.gitattributes export-ignore
