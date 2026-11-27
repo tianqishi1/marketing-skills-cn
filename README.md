@@ -1,5 +1,16 @@
 # marketing-skills-cn：28 个国内营销 Skills（Codex / Claude Code 通用）
 
+[![CI](https://github.com/tianqishi1/marketing-skills-cn/actions/workflows/ci.yml/badge.svg)](https://github.com/tianqishi1/marketing-skills-cn/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+> **28 China-marketing agent skills** (Codex / Claude Code compatible): ad-platform diagnostics
+> (Ocean Engine / Qianchuan, Tencent Ads, Kuaishou, Baidu, Xiaohongshu), e-commerce ads, content
+> generation, KOL seeding, livestream, WeCom private-domain ops, Baidu SEO, social search, domestic
+> AI-search visibility (GEO) and Advertising-Law compliance. Zero MCP dependencies — every skill
+> ships a data contract, workflow, thresholds, output templates and hard constraints.
+>
+> **生态**：技能生态 marketing-skills-cn · Agent 底座 [agent-base](https://github.com/tianqishi1/agent-base) · 评测流水线 [eval-pipeline](https://github.com/tianqishi1/eval-pipeline)
+
 对标 [irinabuht12-oss/marketing-skills](https://github.com/irinabuht12-oss/marketing-skills)（49 个 Google/Meta 营销 skills）重写的**国内适配版**：不是汉化，而是按中国市场的渠道、平台机制、数据生态与合规约束整体重建。适用性评估见 [docs/evaluation.md](docs/evaluation.md)。
 
 **覆盖**：巨量引擎/千川、腾讯广告、快手磁力、百度营销、小红书聚光/蒲公英、万相台 AI 无界、京准通、拼多多、企微私域、直播电商、百度 SEO、社交搜索、国内 AI 搜索（夸克/DeepSeek/豆包/元宝/Kimi/秘塔）、广告法合规。
@@ -147,3 +158,29 @@ git checkout main; git pull
 git tag v1.1.0; git push origin v1.1.0
 # 3. Actions 自动发布 Release
 ```
+
+## 质量门禁（Skill 也是被评测对象）
+
+本仓库把"技能质量"当作工程问题，CI 每次提交运行四层检查：
+
+1. **结构校验**（`scripts/validate_repo.py`）：frontmatter 合法、命名规范、manifest 一致、引用路径存在。
+2. **触发路由评测**（`scripts/eval_triggers.py --gate`）：56 条自然语言用例覆盖全部 28 个 skill，
+   离线确定性代理评测（字符二元组重叠打分），门禁要求 **准确率 ≥85% 且 28/28 全覆盖**。
+   当前基线见 `evals/report.json`；误路由用例即 badcase，改进 description 触发词后必须重跑。
+3. **Markdown lint + 内链检查**：文档质量与链接完整性。
+4. **gitleaks 密钥扫描**：防止凭据入库。
+
+> 代理评测的局限：词面重叠无法理解语义改写，3 条已知误路由记录在 `evals/report.json` 的 confusion 列表。
+> 下一阶段计划接入 LLM judge（用 [eval-pipeline](https://github.com/tianqishi1/eval-pipeline) 的校准与门禁机制，
+> judge 与人工标注 Cohen κ ≥ 0.7 才可信）。
+
+本地运行：
+
+```bash
+python scripts/validate_repo.py
+python scripts/eval_triggers.py --gate
+```
+
+## 贡献
+
+见 [CONTRIBUTING.md](CONTRIBUTING.md)：新增 skill 必须带数据契约 + 阈值来源说明 + 至少 2 条触发用例，并通过全部门禁。

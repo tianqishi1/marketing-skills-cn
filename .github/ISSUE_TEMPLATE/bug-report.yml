@@ -1,0 +1,15 @@
+name: Bug / 口径错误
+description: skill 触发错误、流程缺陷或平台口径过时
+labels: [bug]
+body:
+  - type: input
+    id: skill
+    attributes: {label: 涉及的 skill, placeholder: ads-audit-cn}
+    validations: {required: true}
+  - type: textarea
+    id: what
+    attributes: {label: 问题描述, description: 你说了什么 / 期望触发哪个 skill / 实际发生了什么}
+    validations: {required: true}
+  - type: textarea
+    id: evidence
+    attributes: {label: 证据, description: 平台后台截图、导出字段、法规条文出处（口径纠错必填）}
