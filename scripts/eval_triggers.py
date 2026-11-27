@@ -2,7 +2,7 @@
 import json, re, sys
 from pathlib import Path
 
-R = Path(r"D:\codex\marketing-skills-cn")
+R = Path(__file__).resolve().parent.parent
 
 CASES = {
  "ab-test-analyzer-cn": ["这两版素材哪版效果更好，帮我做个显著性分析", "落地页 A/B 实验数据给你，看看哪版赢"],
