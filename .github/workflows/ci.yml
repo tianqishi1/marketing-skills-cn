@@ -26,6 +26,8 @@ jobs:
         run: pip install pyyaml
       - name: Skills / manifests structure validation
         run: python scripts/validate_repo.py
+      - name: Trigger-routing eval gate (offline proxy, >=85% & full coverage)
+        run: python scripts/eval_triggers.py --gate
       - name: install.ps1 syntax check
         shell: pwsh
         run: |

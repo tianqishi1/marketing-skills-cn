@@ -1,0 +1,12 @@
+name: 新 skill / 增强
+description: 提议新增营销 skill 或增强现有 skill
+labels: [enhancement]
+body:
+  - type: textarea
+    id: scenario
+    attributes: {label: 场景与触发语, description: 用户会说什么话触发它？和现有 skill 的边界在哪？}
+    validations: {required: true}
+  - type: textarea
+    id: contract
+    attributes: {label: 数据契约, description: 需要用户粘贴/上传什么数据（平台真实导出字段）？}
+    validations: {required: true}
