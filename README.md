@@ -1,7 +1,7 @@
 # marketing-skills-cn：28 个国内营销 Skills（Codex / Claude Code 通用）
 
 [![CI](https://github.com/tianqishi1/marketing-skills-cn/actions/workflows/ci.yml/badge.svg)](https://github.com/tianqishi1/marketing-skills-cn/actions/workflows/ci.yml)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 > **28 China-marketing agent skills** (Codex / Claude Code compatible): ad-platform diagnostics
 > (Ocean Engine / Qianchuan, Tencent Ads, Kuaishou, Baidu, Xiaohongshu), e-commerce ads, content
